@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Configuração de Ambiente
+
+1. Copie o arquivo `.env.example` para `.env.local`:
+```bash
+cp .env.example .env.local
+```
+
+2. Ajuste as variáveis no arquivo `.env.local` conforme necessário:
+- `NEXT_PUBLIC_ENV`: Ambiente de execução (development/production)
+- `NEXT_PUBLIC_API_URL`: URL base da API
+
+### Variáveis de Ambiente no Render
+
+Para deploy no Render, configure as seguintes variáveis de ambiente:
+- `NEXT_PUBLIC_ENV=production`
+- `NEXT_PUBLIC_API_URL=[URL_DO_SEU_SERVICO]`
+- `NODE_ENV=production`

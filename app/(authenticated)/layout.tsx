@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Drawer,
@@ -61,17 +61,7 @@ export default function AuthenticatedLayout({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lettyOpen, setLettyOpen] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 600);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -93,7 +83,6 @@ export default function AuthenticatedLayout({
             <ListItemButton
               selected={pathname === item.path}
               sx={{
-                borderRadius: '8px',
                 mb: 0.5,
                 '&.Mui-selected': {
                   backgroundColor: 'primary.main',
@@ -118,7 +107,6 @@ export default function AuthenticatedLayout({
         <ListItemButton
           onClick={handleLettyClick}
           sx={{
-            borderRadius: '8px',
             mb: 0.5,
           }}
         >
@@ -137,7 +125,6 @@ export default function AuthenticatedLayout({
                   selected={pathname.startsWith(item.path)}
                   sx={{
                     pl: 4,
-                    borderRadius: '8px',
                     mb: 0.5,
                     '&.Mui-selected': {
                       backgroundColor: 'primary.main',
@@ -198,7 +185,6 @@ export default function AuthenticatedLayout({
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <Header
         onMenuClick={handleDrawerToggle}
-        isMobile={isMobile}
         drawerWidth={drawerWidth}
       />
       <Box
@@ -247,10 +233,8 @@ export default function AuthenticatedLayout({
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 2,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          minHeight: '100vh',
-          bgcolor: 'background.default',
           mt: '64px',
         }}
       >

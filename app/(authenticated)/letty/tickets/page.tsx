@@ -72,23 +72,33 @@ const mockTickets: Ticket[] = [
   },
 ];
 
-const getPriorityColor = (priority: string) => {
+const getPriorityColor = (priority: string): 'default' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning' => {
   switch (priority) {
-    case 'Baixa': return 'success';
-    case 'Média': return 'info';
-    case 'Alta': return 'warning';
-    case 'Crítica': return 'error';
-    default: return 'default';
+    case 'Baixa':
+      return 'success';
+    case 'Média':
+      return 'info';
+    case 'Alta':
+      return 'warning';
+    case 'Crítica':
+      return 'error';
+    default:
+      return 'default';
   }
 };
 
-const getStatusColor = (status: string) => {
+const getStatusColor = (status: string): 'default' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning' => {
   switch (status) {
-    case 'Aberto': return 'error';
-    case 'Em Andamento': return 'warning';
-    case 'Resolvido': return 'success';
-    case 'Fechado': return 'default';
-    default: return 'default';
+    case 'Aberto':
+      return 'error';
+    case 'Em Andamento':
+      return 'warning';
+    case 'Resolvido':
+      return 'success';
+    case 'Fechado':
+      return 'default';
+    default:
+      return 'default';
   }
 };
 
@@ -197,12 +207,12 @@ export default function Tickets() {
                           <Chip
                             label={ticket.status}
                             size="small"
-                            color={getStatusColor(ticket.status) as any}
+                            color={getStatusColor(ticket.status)}
                           />
                           <Chip
                             label={ticket.priority}
                             size="small"
-                            color={getPriorityColor(ticket.priority) as any}
+                            color={getPriorityColor(ticket.priority)}
                           />
                         </Box>
                       }

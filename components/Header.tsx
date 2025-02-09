@@ -24,11 +24,10 @@ import Link from 'next/link';
 
 interface HeaderProps {
   onMenuClick: () => void;
-  isMobile: boolean;
   drawerWidth: number;
 }
 
-export function Header({ onMenuClick, isMobile }: HeaderProps) {
+export function Header({ onMenuClick }: HeaderProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [notificationsAnchorEl, setNotificationsAnchorEl] = useState<null | HTMLElement>(null);
   const pathname = usePathname();
@@ -150,7 +149,7 @@ export function Header({ onMenuClick, isMobile }: HeaderProps) {
           open={Boolean(notificationsAnchorEl)}
           onClose={handleNotificationsMenuClose}
           PaperProps={{
-            sx: { width: 320, maxHeight: 400 },
+            sx: { width: 320, maxHeight: 400, borderRadius: 0 },
           }}
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
@@ -180,7 +179,7 @@ export function Header({ onMenuClick, isMobile }: HeaderProps) {
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
           PaperProps={{
-            sx: { width: 220 },
+            sx: { width: 220, borderRadius: 0 },
           }}
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
