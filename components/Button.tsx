@@ -3,12 +3,13 @@
 import { Button as MuiButton, ButtonProps as MuiButtonProps, styled } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 
-export interface CustomButtonProps {
-  size?: 'small' | 'medium' | 'large';
+interface CustomButtonProps extends Omit<MuiButtonProps, 'variant'> {
   customVariant?: 'primary' | 'secondary';
 }
 
-const StyledButton = styled(MuiButton)<CustomButtonProps>(({ theme, size = 'medium', customVariant = 'primary' }) => ({
+const StyledButton = styled(MuiButton, {
+  shouldForwardProp: (prop) => prop !== 'customVariant',
+})<CustomButtonProps>(({ theme, size = 'medium', customVariant = 'primary' }) => ({
   textTransform: 'none',
   borderRadius: 168,
   width: size === 'large' ? 200 : 'auto',
@@ -67,9 +68,7 @@ const StyledButton = styled(MuiButton)<CustomButtonProps>(({ theme, size = 'medi
   },
 }));
 
-type ButtonProps = Omit<MuiButtonProps, 'variant'> & CustomButtonProps;
-
-const Button = ({ children, customVariant = 'primary', size = 'medium', ...props }: ButtonProps) => {
+const Button = ({ children, customVariant = 'primary', size = 'medium', ...props }: CustomButtonProps) => {
   return (
     <StyledButton 
       variant="contained" 

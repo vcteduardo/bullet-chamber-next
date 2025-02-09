@@ -29,7 +29,6 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Logo } from '@/components/Logo';
-import Button from '@/components/Button';
 
 const drawerWidth = 280;
 
@@ -169,14 +168,20 @@ export default function AuthenticatedLayout({
             </Typography>
           </Box>
         </Box>
-        <Button
-          customVariant="secondary"
-          startIcon={<LogoutIcon />}
-          fullWidth
-          size="small"
+        <ListItemButton
+          sx={{
+            mb: 0.5,
+            color: 'error.main',
+            '&:hover': {
+              backgroundColor: 'error.lighter',
+            },
+          }}
         >
-          Sair
-        </Button>
+          <ListItemIcon sx={{ minWidth: 40, color: 'error.main' }}>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sair" />
+        </ListItemButton>
       </Box>
     </Box>
   );
@@ -235,7 +240,7 @@ export default function AuthenticatedLayout({
           flexGrow: 1,
           p: 2,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          mt: '64px',
+          mt: '40px',
         }}
       >
         <Toolbar />

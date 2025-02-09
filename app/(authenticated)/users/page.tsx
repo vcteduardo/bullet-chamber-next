@@ -109,21 +109,25 @@ export default function Users() {
                 <ListItemText
                   primary={user.name}
                   secondary={
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: 0.5 }}>
-                      <Typography variant="body2" color="text.secondary">
+                    <Box component="span" sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: 0.5 }}>
+                      <Typography component="span" variant="body2" color="text.secondary">
                         {user.email}
                       </Typography>
-                      <Chip
-                        label={user.role}
-                        size="small"
-                        color="primary"
-                        variant="outlined"
-                      />
-                      <Chip
-                        label={user.status}
-                        size="small"
-                        color={user.status === 'Ativo' ? 'success' : 'default'}
-                      />
+                      <Box component="span">
+                        <Chip
+                          label={user.role}
+                          size="small"
+                          color="primary"
+                          variant="outlined"
+                        />
+                      </Box>
+                      <Box component="span">
+                        <Chip
+                          label={user.status}
+                          size="small"
+                          color={user.status === 'Ativo' ? 'success' : 'default'}
+                        />
+                      </Box>
                     </Box>
                   }
                 />
