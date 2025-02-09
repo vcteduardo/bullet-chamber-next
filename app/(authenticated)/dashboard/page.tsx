@@ -80,11 +80,11 @@ export default function Dashboard() {
 
         {/* Gráfico de Área - Contas Abertas */}
         <Grid item xs={12} lg={8}>
-          <Paper sx={{ p: 3, height: '100%' }}>
+          <Paper sx={{ p: 3, height: 400 }}>
             <Typography variant="h6" gutterBottom>
               Contas Abertas por Mês
             </Typography>
-            <Box sx={{ height: 300 }}>
+            <Box sx={{ height: 340 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={monthlyData}
@@ -108,11 +108,11 @@ export default function Dashboard() {
 
         {/* Gráfico de Pizza - Distribuição de Transações */}
         <Grid item xs={12} lg={4}>
-          <Paper sx={{ p: 3, height: '100%' }}>
+          <Paper sx={{ p: 3, height: 400 }}>
             <Typography variant="h6" gutterBottom>
               Distribuição de Transações
             </Typography>
-            <Box sx={{ height: 300 }}>
+            <Box sx={{ height: 340 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -138,11 +138,11 @@ export default function Dashboard() {
 
         {/* Gráfico de Barras - Depósitos e Saques */}
         <Grid item xs={12}>
-          <Paper sx={{ p: 3 }}>
+          <Paper sx={{ p: 3, height: 400 }}>
             <Typography variant="h6" gutterBottom>
               Volume de Depósitos e Saques
             </Typography>
-            <Box sx={{ height: 300 }}>
+            <Box sx={{ height: 340 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={monthlyData}
