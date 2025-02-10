@@ -15,6 +15,14 @@ import {
   TextField,
   InputAdornment,
   Chip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -31,6 +39,12 @@ interface Document {
   category: string;
   size: string;
   updatedAt: string;
+}
+
+interface NewDocument {
+  name: string;
+  category: string;
+  file: File | null;
 }
 
 const mockDocuments: Document[] = [
@@ -71,6 +85,30 @@ const categories = [
 export default function Documents() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [openNewDocumentModal, setOpenNewDocumentModal] = useState(false);
+  const [newDocument, setNewDocument] = useState<NewDocument>({
+    name: '',
+    category: '',
+    file: null,
+  });
+
+  const handleOpenModal = () => setOpenNewDocumentModal(true);
+  const handleCloseModal = () => {
+    setOpenNewDocumentModal(false);
+    setNewDocument({ name: '', category: '', file: null });
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    setNewDocument(prev => ({ ...prev, file }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Aqui você implementará a lógica para salvar o documento
+    console.log('Novo documento:', newDocument);
+    handleCloseModal();
+  };
 
   const filteredDocuments = mockDocuments.filter(doc =>
     (selectedCategory === 'Todos' || doc.category === selectedCategory) &&
@@ -84,10 +122,71 @@ export default function Documents() {
         <Typography variant="h4" component="h1">
           Documentos
         </Typography>
-        <Button startIcon={<AddIcon />} size="large">
+        <Button startIcon={<AddIcon />} size="large" onClick={handleOpenModal}>
           Novo Documento
         </Button>
       </Box>
+
+      {/* Modal de Novo Documento */}
+      <Dialog open={openNewDocumentModal} onClose={handleCloseModal} maxWidth="sm" fullWidth>
+        <DialogTitle>Novo Documento</DialogTitle>
+        <form onSubmit={handleSubmit}>
+          <DialogContent>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <TextField
+                label="Nome do Documento"
+                fullWidth
+                required
+                value={newDocument.name}
+                onChange={(e) => setNewDocument(prev => ({ ...prev, name: e.target.value }))}
+              />
+              
+              <FormControl fullWidth required>
+                <InputLabel>Categoria</InputLabel>
+                <Select
+                  value={newDocument.category}
+                  label="Categoria"
+                  onChange={(e) => setNewDocument(prev => ({ ...prev, category: e.target.value }))}
+                >
+                  {categories.filter(cat => cat.name !== 'Todos').map((category) => (
+                    <MenuItem key={category.id} value={category.name}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <Button
+                customVariant="secondary"
+                component="label"
+                startIcon={<CloudDownloadIcon />}
+                sx={{ mt: 1 }}
+              >
+                Selecionar Arquivo
+                <input
+                  type="file"
+                  hidden
+                  onChange={handleFileChange}
+                  accept=".pdf,.doc,.docx,.txt"
+                />
+              </Button>
+              {newDocument.file && (
+                <Typography variant="body2" color="text.secondary">
+                  Arquivo selecionado: {newDocument.file.name}
+                </Typography>
+              )}
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button customVariant="secondary" onClick={handleCloseModal}>
+              Cancelar
+            </Button>
+            <Button type="submit">
+              Salvar
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
 
       <Grid container spacing={3}>
         <Grid item xs={12} md={3}>

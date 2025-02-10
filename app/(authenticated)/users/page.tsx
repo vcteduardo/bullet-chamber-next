@@ -22,6 +22,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PersonIcon from '@mui/icons-material/Person';
 import Button from '@/components/Button';
+import NewDocumentForm from '@/components/NewDocumentForm';
 
 interface User {
   id: number;
@@ -60,7 +61,7 @@ const mockUsers: User[] = [
   // Adicione mais usuários mock aqui
 ];
 
-export default function Users() {
+const UsersPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredUsers = mockUsers.filter(user =>
@@ -142,6 +143,10 @@ export default function Users() {
           ))}
         </List>
       </Paper>
+
+      <NewDocumentForm />
     </Box>
   );
-} 
+};
+
+export default UsersPage; 
